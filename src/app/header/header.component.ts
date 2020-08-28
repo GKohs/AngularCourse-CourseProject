@@ -1,3 +1,4 @@
+import { AuthInterceptiorService } from './../auth/auth-interceptor.service';
 import { AuthService } from './../auth/auth.service';
 import { DataStorageService } from './../shared/data-storage.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -29,6 +30,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onFetchData() {
     this.dataStorageService.fetchRecipes().subscribe();
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 
   ngOnDestroy() {
