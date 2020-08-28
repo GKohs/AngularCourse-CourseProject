@@ -50,4 +50,9 @@ export class AuthComponent {
     // console.log(form.value);
     // form.reset();
   }
+
+  onHandleError() {
+    this.error = null;
+  }
+
 }
