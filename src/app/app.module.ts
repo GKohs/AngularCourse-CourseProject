@@ -58,7 +58,10 @@ import { AuthInterceptiorService } from './auth/auth-interceptor.service';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ // not necessary in Angular 9+
+    AlertComponent
+  ]
 })
 export class AppModule { }
 
