@@ -7,6 +7,7 @@ import { ShoppingListComponent } from './shopping-list.component';
 import { ShoppingListRoutingModule } from './shopping-list-routing.module';
 
 import { SharedModule } from './../shared/shared.module';
+// import { LoggingService } from '../logging.service';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SharedModule } from './../shared/shared.module';
   ],
   exports: [
     ShoppingListComponent  // TODO: needed for recipe access to send ingredients?
-  ]
+  ],
+  // providers: [LoggingService]
 })
 export class ShoppingListModule {}
