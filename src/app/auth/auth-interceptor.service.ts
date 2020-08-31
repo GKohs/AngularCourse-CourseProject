@@ -4,7 +4,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpParams } from '@angular/
 import { take, exhaustMap } from 'rxjs/operators';
 
 @Injectable()
-export class AuthInterceptiorService implements HttpInterceptor {
+export class AuthInterceptorService implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {

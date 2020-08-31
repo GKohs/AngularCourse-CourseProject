@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptiorService } from './auth/auth-interceptor.service';
+
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { RecipeService } from './recipes/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 
@@ -12,7 +12,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     RecipeService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptiorService,
+      useClass: AuthInterceptorService,
       multi: true
     }
   ]

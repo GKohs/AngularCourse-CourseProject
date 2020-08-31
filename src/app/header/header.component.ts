@@ -1,8 +1,8 @@
-import { AuthInterceptiorService } from './../auth/auth-interceptor.service';
-import { AuthService } from './../auth/auth.service';
-import { DataStorageService } from './../shared/data-storage.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+
+import { AuthService } from './../auth/auth.service';
+import { DataStorageService } from './../shared/data-storage.service';
 
 @Component({
   selector: 'app-header',
