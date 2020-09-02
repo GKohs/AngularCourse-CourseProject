@@ -1,9 +1,15 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# firebase related files (from deployment)
+/.firebase
+.firebaserc
+firebase.json
+
 # compiled output
 /dist
 /tmp
 /out-tsc
+
 # Only exists if Bazel was run
 /bazel-out
 
