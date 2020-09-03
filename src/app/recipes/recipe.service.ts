@@ -1,38 +1,20 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Subject } from 'rxjs';
+import * as ShoppingListActions from '../shopping-list/store/shopping-list.action';
 
 
 @Injectable()
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
 
-  // Will be fetched from firebase
-  // private recipes: Recipe[] = [
-  //   new Recipe(
-  //     'Martabak',
-  //     'Ein Biss in die süße Kindheit!',
-  //     'https://img-global.cpcdn.com/recipes/5559831272357888/640x640sq70/photo.jpg',
-  //     [
-  //       new Ingredient('Flour', 1),
-  //       new Ingredient('Nutella', 5)
-  //     ]),
-  //   new Recipe(
-  //     'Fake Gado-Gado',
-  //     'Wenn du lediglich "versuchen" möchtest, es richtig zu machen.',
-  //     'https://recipecontent.fooby.ch/15287_3-2_480-320.jpg',
-  //     [
-  //       new Ingredient('Gado 1', 2),
-  //       new Ingredient('Gado 2', 3)
-  //     ])
-  // ];
-
   private recipes: Recipe[] = [];
 
-  constructor(private slService: ShoppingListService) { }
+  constructor(private slService: ShoppingListService, private store: Store<{ shoppingList: { ingredients: Ingredient[] } }>) { }
 
   setRecipes(recipes: Recipe[]) {
     this.recipes = recipes;
@@ -48,7 +30,8 @@ export class RecipeService {
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
-    this.slService.addIngredients(ingredients);
+    // this.slService.addIngredients(ingredients);
+    this.store.dispatch(new ShoppingListActions.AddIngredients(ingredients));
   }
 
   addRecipe(recipe: Recipe) {
