@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ComponentFactoryResolver, ViewChild, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -15,8 +15,8 @@ import * as AuthActions from './store/auth.actions';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnDestroy {
-  isLoginMode = true;
+export class AuthComponent implements OnInit, OnDestroy {
+  isLoginMode = true;  // not necessary for NgRx since it's only important in this component
   isLoading = false;
   error: string = null;
   @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
@@ -29,6 +29,13 @@ export class AuthComponent implements OnDestroy {
     private componentFactoryResolver: ComponentFactoryResolver,
     private store: Store<fromApp.AppState>
   ) {}
+
+  ngOnInit() {
+    this.store.select('auth').subscribe(authState => {
+      this.isLoading = authState.loading;
+      this.error = authState.authError;
+    });
+  }
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -53,16 +60,16 @@ export class AuthComponent implements OnDestroy {
       authObs = this.authService.signup(email, password);
     }
 
-    authObs.subscribe(resData => {
-      console.log(resData);
-      this.router.navigate(['/recipes']);
-      this.isLoading = false;
-    }, errorMsg => {
-      console.log(errorMsg);
-      this.error = errorMsg;
-      this.showErrorAlert(errorMsg);
-      this.isLoading = false;
-    });
+    // authObs.subscribe(resData => {
+    //   console.log(resData);
+    //   this.router.navigate(['/recipes']);
+    //   this.isLoading = false;
+    // }, errorMsg => {
+    //   console.log(errorMsg);
+    //   this.error = errorMsg;
+    //   this.showErrorAlert(errorMsg);
+    //   this.isLoading = false;
+    // });
 
     // console.log(form.value);
     // form.reset();
