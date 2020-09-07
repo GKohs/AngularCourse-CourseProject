@@ -20,7 +20,7 @@ export interface AuthResponseData {
   registered?: boolean
 }
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   // user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
@@ -31,38 +31,38 @@ export class AuthService {
     private store: Store<fromApp.AppState>
   ) {}
 
-  signup(email: string, password: string) {
-    return this.http
-      .post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey,
-      {
-        email: email,
-        password: password,
-        returnSecureToken: true
-      })
-      .pipe(catchError(this.handleError), tap(resData => {
-        this.handleAuthentication(
-          resData.email,
-          resData.localId,
-          resData.idToken,
-          +resData.expiresIn
-        );
-      })
-    );
-  }
+  // signup(email: string, password: string) {
+  //   return this.http
+  //     .post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey,
+  //       {
+  //         email: email,
+  //         password: password,
+  //         returnSecureToken: true
+  //       })
+  //     .pipe(catchError(this.handleError), tap(resData => {
+  //       this.handleAuthentication(
+  //         resData.email,
+  //         resData.localId,
+  //         resData.idToken,
+  //         +resData.expiresIn
+  //       );
+  //     })
+  //     );
+  // }
 
-  login(email: string, password: string) {
-    return this.http
-      .post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaseAPIKey,
-      {
-        email: email,
-        password: password,
-        returnSecureToken: true
-      })
-      .pipe(catchError(this.handleError), tap(resData => {
-        this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
-      })
-    );
-  }
+  // login(email: string, password: string) {
+  //   return this.http
+  //     .post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaseAPIKey,
+  //       {
+  //         email: email,
+  //         password: password,
+  //         returnSecureToken: true
+  //       })
+  //     .pipe(catchError(this.handleError), tap(resData => {
+  //       this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+  //     })
+  //     );
+  // }
 
   autoLogin() {
     const userData: {
@@ -95,7 +95,6 @@ export class AuthService {
   logout() {
     // this.user.next(null);
     this.store.dispatch(new AuthActions.Logout());
-    this.router.navigate(['/auth']);
     localStorage.removeItem('userData');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
@@ -113,8 +112,7 @@ export class AuthService {
     userId: string,
     token: string,
     expiresIn: number
-  )
-    {
+  ) {
     const expirationDate = new Date(new Date().getTime() + (expiresIn * 1000));
     const user = new User(
       email,
@@ -135,11 +133,11 @@ export class AuthService {
     }
     switch (errorRes.error.error.message) {
       case 'EMAIL_EXISTS':
-        errorMsg  = 'This email exists already.';
+        errorMsg = 'This email exists already.';
         break;
       case 'EMAIL_NOT_FOUND':
       case 'INVALID_PASSWORD':
-        errorMsg  = 'This email is not registered or the password is wrong.';
+        errorMsg = 'This email is not registered or the password is wrong.';
         break;
     }
     return throwError(errorMsg);
