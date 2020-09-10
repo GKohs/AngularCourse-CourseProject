@@ -10,7 +10,7 @@ import * as RecipesActions from '../recipes/store/recipe.actions';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
-  private httpUrl: string =  'https://ng-course-project-2aa9a.firebaseio.com/recipes.json';
+  private httpUrl: string = 'https://ng-course-project-2aa9a.firebaseio.com/recipes.json';
 
   constructor(
     private http: HttpClient,
