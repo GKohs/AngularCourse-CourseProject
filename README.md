@@ -4,6 +4,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Personal notes
 
+ATTENTION REGARDING NgRx:
+  This is with old (but not legacy) syntax - there is a thread with the differences and discussions about the new syntax:
+  https://www.udemy.com/course/the-complete-guide-to-angular-2/learn/lecture/14466642#questions/7350498
+
+  Everything still works the same, it is just some syntactic sugar.
+
 This runs with Bootstrap 3.
 
 ## Development server
