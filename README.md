@@ -11,7 +11,6 @@ ATTENTION REGARDING NgRx:
   Everything still works the same, it is just some syntactic sugar.
 
 This runs with Bootstrap 3.
-
 This is a merge test sentence.
 
 ## Development server
